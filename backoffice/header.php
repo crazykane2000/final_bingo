@@ -147,6 +147,11 @@
            <!--  <a class="c-dropdown__item dropdown-item" href="#">Edit Profile</a>
             <a class="c-dropdown__item dropdown-item" href="#">View Activity</a> -->
             <a class="c-dropdown__item dropdown-item" href="logout.php">Log out</a>
+            <hr style="opacity: .2" />
+            <div style="padding:10px;font-size: 12px;color: #999">
+              <?php echo $pdo_auth['type']; ?><br/>
+            <?php echo $pdo_auth['username']; ?>
+            </div>
           </div>
         </div>
 
@@ -167,7 +172,7 @@
             <a class="c-toolbar__nav-link" href="configure_percentages.php">Configure Percentages</a> -->
           </nav>
           <div class="u-hidden-down@desktop">
-            <?php if ($pdo_auth['type']=="Sales Support") {
+            <?php if ($pdo_auth['type']=="Sales") {
               echo '<a class="c-btn c-btn--info c-btn--small" href="add_business_partner.php">New Business Partner</a>';
             } ?>
             

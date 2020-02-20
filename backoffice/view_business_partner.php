@@ -70,7 +70,7 @@
         <div class="container-fluid" style="padding-left:40px;">
           <div class="row">
             <div class="col-lg-12 col-md-12 ">
-              <h4>View all Business Partners</h4>
+              <h4>View all Business Partners (<?php echo $pdo_auth['country']; ?>)</h4>
               <p class="u-mb-small">Administrator Sections</p>
               <div class="">
                
@@ -78,6 +78,9 @@
                 <div class="c-card" style="min-height:800px">
                    <h4>Business Partners</h4>
                    <hr style="margin: 10px 0px;opacity: .2" />
+
+                   <?php see_status($_REQUEST); ?>
+                   <div style="padding: 10px;"></div>
                    <table class="tabler">
                      <thead>
                        <th>S.No.</th>
@@ -117,18 +120,22 @@
                                 $rand2 = rand(100000,700000);
                                // print_r($value);
 
-                                $btns = '<a href="approve_partner.php?id='.$value['id'].'" class="c-btn c-btn--small c-btn--success ">Approve</a>';
+                                $btns = '<a href="approve_kyc.php?id='.$value['id'].'" class="c-btn c-btn--small c-btn--success ">Update KYC</a>';
                                 $status = '<label class="badge" style="background-color: orange;color:#fff;padding: 5px;">Pending</label>';
                                 if ($value['status']=="Approved") {
                                   $status = '<label class="badge" style="background-color: green;color:#fff;padding: 5px;">Approved</label>';
-                                  $btns = '<a href="unapprove_partner.php?id='.$value['id'].'" class="c-btn c-btn--small c-btn--danger">Unapprove</a>';
+                                  $btns = '<a href="mailto:?subject=I wanted you to see this site&amp;body=Your Username : '.$value['email'].'%0D%0A Password is : '.$value['pass'].' %0D%0A Please Login Via Bingo Business Partner Panel. %0D%0A%0D%0A"   title="Share by Email" class="c-btn c-btn--small c-btn--info">Share Details</a><br/> <a href="approve_kyc.php?id='.$value['id'].'" style="Font-size:10px;" >Update Again</a>';
+                                }
+
+                                if ($value['country']!=$pdo_auth['country']) {
+                                  continue;
                                 }
 
                                // print_r($value);
                                 echo '<tr>
                                        <td>'.$i.'.</td>
                                        <td data-id="'.$value['id'].'"  style="font-weight: bold;color:#333;cursor:pointer" class="tango" data-toggle="modal" data-target="#modal1">'.$ratay.'<br/><b>'.$value['name'].'</b><br/>
-                                        Tx : <span style="color:#888;font-size:12px;">'.$value['tx_address'].'</span>
+                                        Tx : <span style="color:#888;font-size:12px;">'.$value['country'].'</span>
                                        </td>
                                        <td >'.$value['business_type'].'</td>
                                        <td>'.$status.'</td>
